@@ -70,8 +70,3 @@ npm start
 
 
 
-
-https://github.com/user-attachments/assets/5e441d8c-e404-46cc-88b5-bd636836dbbb
-
-
-
