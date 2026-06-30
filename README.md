@@ -1,8 +1,17 @@
 # Campus Notification Platform - Full Stack Evaluation
 
 ## 🚀 Submission Deliverables & Demo Links
-* **Localhost App Address:** `http://localhost:3000`
-* **Application Walkthrough Video:** [Click here to watch the Video Demo](./walkthrough-demo.mp4)
+* **Localhost App Address:** `http://localhost:5173/`
+* **Application Walkthrough Video:** 
+
+
+https://github.com/user-attachments/assets/639355ca-765d-4b79-af73-b8cc44bc787b
+
+
+
+
+
+
 
 ---
 
