@@ -137,3 +137,94 @@ Only fetch the first 20 notifications initially (as designed in Stage 1's `limit
 ## Stage 5
 
 ### Shortcomings of the pseudocode
+// System places a single message into a message broker/queue instantly
+function notify_all_async(student_ids, message_content) {
+    const job_payload = {
+        targets: student_ids,
+        message: message_content,
+        timestamp: new Date()
+    };
+    
+    // Instantaneous operation - non-blocking
+    MessageQueue.publish("broadcast_notifications", job_payload);
+    return { success: true, message: "Broadcast job successfully queued." };
+}
+
+// Independent background worker handles processing and retries safely
+function process_queue_worker(job_payload) {
+    for (const student_id of job_payload.targets) {
+        // 1. Process Database entry
+        try {
+            save_to_db(student_id, job_payload.message);
+        } catch (db_error) {
+            Log("backend", "error", "db_worker", "Database insert failed for student: " + student_id);
+        }
+
+        // 2. Process real-time WebSockets/SSE push
+        push_to_app(student_id, job_payload.message);
+
+        // 3. Process Email asynchronously with independent error recovery
+        MessageQueue.publish("send_individual_email", { student_id, message: job_payload.message });
+    }
+}
+
+# Stage 6
+
+## Priority Inbox Algorithm Implementation
+
+/**
+ * Sorts and returns the top 'n' unread notifications based on type weight and recency.
+ * @param {Array} notifications - Array of notification objects fetched from the API
+ * @param {number} n - Number of top notifications to return
+ * @returns {Array} Ranked priority notifications
+ */
+function getPriorityInbox(notifications, n = 10) {
+    // 1. Define type weights as specified by criteria
+    const WEIGHTS = {
+        'Placement': 300000000000, // Scaled multiplier to balance time differences
+        'Result':    200000000000,
+        'Event':     100000000000
+    };
+
+    // 2. Filter unread items and compute scores
+    const scoredNotifications = notifications
+        .map(notif => {
+            const typeWeight = WEIGHTS[notif.type] || 0;
+            const timeParsed = new Date(notif.Timestamp).getTime();
+            
+            // Priority score combines intrinsic type weight and recency
+            const priorityScore = typeWeight + timeParsed;
+
+            return { ...notif, priorityScore };
+        });
+
+    // 3. Sort descending by score and slice the top 'n' items
+    return scoredNotifications
+        .sort((a, b) => b.priorityScore - a.priorityScore)
+        .slice(0, n)
+        .map(({ priorityScore, ...originalNotification }) => originalNotification); // Clean up score metadata
+}
+
+// Example Usage matching the Test Server API Output structure:
+const sampleApiData = [
+    { "ID": "1", "type": "Event", "Message": "tech-fest", "Timestamp": "2026-04-22 17:50:06" },
+    { "ID": "2", "type": "Placement", "Message": "Advanced Micro Devices hiring", "Timestamp": "2026-04-22 17:49:42" },
+    { "ID": "3", "type": "Result", "Message": "project-review", "Timestamp": "2026-04-22 17:50:18" }
+];
+
+console.log(getPriorityInbox(sampleApiData, 2));
+
+
+
+
+# Stage 7
+
+## Application Screenshots
+
+### 🖥️ Desktop View
+![Desktop Notification View](https://github.com/urvashiigautam99-creator/2303051050975/blob/main/notification-app-fe/screenshots/desktop-view?raw=true)
+
+---
+
+### 📱 Mobile View
+![Mobile Notification View](https://github.com/urvashiigautam99-creator/2303051050975/blob/main/notification-app-fe/screenshots/mobile-view?raw=true)
