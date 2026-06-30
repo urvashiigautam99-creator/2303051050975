@@ -1,3 +1,4 @@
+<img width="1896" height="950" alt="Screenshot 2026-06-30 150258" src="https://github.com/user-attachments/assets/60c6ea88-e159-4424-808e-9d29a7118fe1" />
 # Notification System Design
 
 ## Stage 1
@@ -229,10 +230,12 @@ console.log(getPriorityInbox(sampleApiData, 2));
 Here is the notification feed rendering on a desktop layout:
 
 ![Desktop Notification View](notification-app-fe/screenshots/desktop-view)
+<img width="1907" height="989" alt="Screenshot 2026-06-30 150240" src="https://github.com/user-attachments/assets/5605cd93-7bee-4381-ab3f-9ad0b753851d" />
+<img width="1896" height="950" alt="Screenshot 2026-06-30 150258" src="https://github.com/user-attachments/assets/2041e654-90b5-42e2-bb77-ed35ecfb8fac" />
+<img width="933" height="783" alt="Screenshot 2026-06-30 145926" src="https://github.com/user-attachments/assets/7f9e5c51-aed4-46a4-80ec-0d27d612c548" />
 
----
 
 ### 📱 Mobile View
 Here is the responsive layout displaying the feed on mobile devices:
 
-![Mobile Notification View](notification-app-fe/screenshots/mobile-view)
+<img width="941" height="874" alt="Screenshot 2026-06-30 151101" src="https://github.com/user-attachments/assets/fe057b4e-5ccc-446c-8a36-c2c8aaa95e6b" />
