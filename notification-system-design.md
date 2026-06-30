@@ -221,10 +221,18 @@ console.log(getPriorityInbox(sampleApiData, 2));
 
 ## Application Screenshots
 
+# Stage 7
+
+## Application Screenshots
+
 ### 🖥️ Desktop View
-![Desktop Notification View](https://github.com/urvashiigautam99-creator/2303051050975/blob/main/notification-app-fe/screenshots/desktop-view?raw=true)
+Here is the notification feed rendering on a desktop layout:
+
+![Desktop Notification View](notification-app-fe/screenshots/desktop-view)
 
 ---
 
 ### 📱 Mobile View
-![Mobile Notification View](https://github.com/urvashiigautam99-creator/2303051050975/blob/main/notification-app-fe/screenshots/mobile-view?raw=true)
+Here is the responsive layout displaying the feed on mobile devices:
+
+![Mobile Notification View](notification-app-fe/screenshots/mobile-view)
